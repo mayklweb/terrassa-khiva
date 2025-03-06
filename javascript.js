@@ -34,58 +34,57 @@ window.onload = function () {
 
 viewer = new PANOLENS.Viewer();
 
-// function transitionToPanorama(nextPanorama) {
-//   let duration = 800;
-//   let startFov = viewer.camera.fov;
-//   let endFov = 100;
+function transitionToPanorama(nextPanorama) {
+  let duration = 800;
+  let startFov = viewer.camera.fov;
+  let endFov = 100;
 
-//   function animate(zoomOut, callback) {
-//     let startTime = performance.now();
-//     requestAnimationFrame(function step(time) {
-//       let progress = Math.min((time - startTime) / duration, 1);
-//       viewer.camera.fov = zoomOut
-//         ? startFov + (endFov - startFov) * progress
-//         : endFov - (endFov - startFov) * progress;
-//       viewer.camera.updateProjectionMatrix();
-//       viewer.container.style.opacity = zoomOut ? 1 - progress : progress;
+  function animate(zoomOut, callback) {
+    let startTime = performance.now();
+    requestAnimationFrame(function step(time) {
+      let progress = Math.min((time - startTime) / duration, 1);
+      viewer.camera.fov = zoomOut
+        ? startFov + (endFov - startFov) * progress
+        : endFov - (endFov - startFov) * progress;
+      viewer.camera.updateProjectionMatrix();
+      viewer.container.style.opacity = zoomOut ? 1 - progress : progress;
 
-//       if (progress < 1) requestAnimationFrame(step);
-//       else if (callback) callback();
-//     });
-//   }
+      if (progress < 1) requestAnimationFrame(step);
+      else if (callback) callback();
+    });
+  }
 
-//   animate(true, () => {
-//     viewer.setPanorama(nextPanorama);
-//     animate(false);
-//   });
-// }
+  animate(true, () => {
+    viewer.setPanorama(nextPanorama);
+    animate(false);
+  });
+}
 
-// }
-
-// function onEnter(panorama) {
-//   let startFov = 40; // Boshlang'ich FOV
-//   let endFov = 90; // Zoom qilganda FOV
-//   let duration = 1000; // 1 soniya ichida zoom
-
-//   let startTime = performance.now();
-
-//   function animateZoom(time) {
-//     let progress = (time - startTime) / duration;
-//     if (progress < 1) {
-//       viewer.camera.fov = startFov - (startFov - endFov) * progress;
-//       viewer.camera.updateProjectionMatrix();
-//       requestAnimationFrame(animateZoom);
-//     } else {
-//       viewer.camera.fov = endFov;
-//       viewer.camera.updateProjectionMatrix();
-//     }
-//   }
-
-//   requestAnimationFrame(animateZoom);
-// }
 
 function onEnter(panorama) {
-  // transitionToPanorama(panorama);
+  let startFov = 40; // Boshlang'ich FOV
+  let endFov = 90; // Zoom qilganda FOV
+  let duration = 1000; // 1 soniya ichida zoom
+
+  let startTime = performance.now();
+
+  function animateZoom(time) {
+    let progress = (time - startTime) / duration;
+    if (progress < 1) {
+      viewer.camera.fov = startFov - (startFov - endFov) * progress;
+      viewer.camera.updateProjectionMatrix();
+      requestAnimationFrame(animateZoom);
+    } else {
+      viewer.camera.fov = endFov;
+      viewer.camera.updateProjectionMatrix();
+    }
+  }
+
+  requestAnimationFrame(animateZoom);
+}
+
+function onEnter(panorama) {
+  transitionToPanorama(panorama);
 }
 
 function onProgress(event) {
