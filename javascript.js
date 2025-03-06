@@ -32,7 +32,9 @@ window.onload = function () {
 
 
 
-viewer = new PANOLENS.Viewer();
+viewer = new PANOLENS.Viewer({
+  contolbar: false
+});
 
 function transitionToPanorama(nextPanorama) {
   let duration = 800;
@@ -61,27 +63,27 @@ function transitionToPanorama(nextPanorama) {
 }
 
 
-function onEnter(panorama) {
-  let startFov = 40; // Boshlang'ich FOV
-  let endFov = 90; // Zoom qilganda FOV
-  let duration = 1000; // 1 soniya ichida zoom
+// function onEnter(panorama) {
+//   let startFov = 40; // Boshlang'ich FOV
+//   let endFov = 90; // Zoom qilganda FOV
+//   let duration = 1000; // 1 soniya ichida zoom
 
-  let startTime = performance.now();
+//   let startTime = performance.now();
 
-  function animateZoom(time) {
-    let progress = (time - startTime) / duration;
-    if (progress < 1) {
-      viewer.camera.fov = startFov - (startFov - endFov) * progress;
-      viewer.camera.updateProjectionMatrix();
-      requestAnimationFrame(animateZoom);
-    } else {
-      viewer.camera.fov = endFov;
-      viewer.camera.updateProjectionMatrix();
-    }
-  }
+//   function animateZoom(time) {
+//     let progress = (time - startTime) / duration;
+//     if (progress < 1) {
+//       viewer.camera.fov = startFov - (startFov - endFov) * progress;
+//       viewer.camera.updateProjectionMatrix();
+//       requestAnimationFrame(animateZoom);
+//     } else {
+//       viewer.camera.fov = endFov;
+//       viewer.camera.updateProjectionMatrix();
+//     }
+//   }
 
-  requestAnimationFrame(animateZoom);
-}
+//   requestAnimationFrame(animateZoom);
+// }
 
 function onEnter(panorama) {
   transitionToPanorama(panorama);
