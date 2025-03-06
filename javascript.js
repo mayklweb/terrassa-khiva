@@ -34,31 +34,31 @@ window.onload = function () {
 
 viewer = new PANOLENS.Viewer();
 
-function transitionToPanorama(nextPanorama) {
-  let duration = 800;
-  let startFov = viewer.camera.fov;
-  let endFov = 100;
+// function transitionToPanorama(nextPanorama) {
+//   let duration = 800;
+//   let startFov = viewer.camera.fov;
+//   let endFov = 100;
 
-  function animate(zoomOut, callback) {
-    let startTime = performance.now();
-    requestAnimationFrame(function step(time) {
-      let progress = Math.min((time - startTime) / duration, 1);
-      viewer.camera.fov = zoomOut
-        ? startFov + (endFov - startFov) * progress
-        : endFov - (endFov - startFov) * progress;
-      viewer.camera.updateProjectionMatrix();
-      viewer.container.style.opacity = zoomOut ? 1 - progress : progress;
+//   function animate(zoomOut, callback) {
+//     let startTime = performance.now();
+//     requestAnimationFrame(function step(time) {
+//       let progress = Math.min((time - startTime) / duration, 1);
+//       viewer.camera.fov = zoomOut
+//         ? startFov + (endFov - startFov) * progress
+//         : endFov - (endFov - startFov) * progress;
+//       viewer.camera.updateProjectionMatrix();
+//       viewer.container.style.opacity = zoomOut ? 1 - progress : progress;
 
-      if (progress < 1) requestAnimationFrame(step);
-      else if (callback) callback();
-    });
-  }
+//       if (progress < 1) requestAnimationFrame(step);
+//       else if (callback) callback();
+//     });
+//   }
 
-  animate(true, () => {
-    viewer.setPanorama(nextPanorama);
-    animate(false);
-  });
-}
+//   animate(true, () => {
+//     viewer.setPanorama(nextPanorama);
+//     animate(false);
+//   });
+// }
 
 // }
 
@@ -85,7 +85,7 @@ function transitionToPanorama(nextPanorama) {
 // }
 
 function onEnter(panorama) {
-  transitionToPanorama(panorama);
+  // transitionToPanorama(panorama);
 }
 
 function onProgress(event) {
