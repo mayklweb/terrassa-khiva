@@ -20,20 +20,19 @@ let viewer,
   currentPanorama,
   interval;
 
-
 window.onload = function () {
   let element = document.getElementById("progress");
   if (element) {
-      element.style.display = "block"; // Xatolikni oldini olish
+    element.style.display = "block"; // Xatolikni oldini olish
   } else {
-      console.error("Element topilmadi!");
+    console.error("Element topilmadi!");
   }
 };
 
-
-
 viewer = new PANOLENS.Viewer({
-  contolbar: false
+  output: "console", // Konsolda xatoliklarni ko'rish uchun
+  autoRotate: true, // Avtomatik aylanishni yoqish
+  autoRotateSpeed: 0.4, // Aylanish tezligi
 });
 
 function transitionToPanorama(nextPanorama) {
@@ -61,7 +60,6 @@ function transitionToPanorama(nextPanorama) {
     animate(false);
   });
 }
-
 
 // function onEnter(panorama) {
 //   let startFov = 40; // Boshlang'ich FOV
@@ -227,8 +225,8 @@ viewer.add(
   panorama16
 );
 
-// document.querySelectorAll("div").forEach((div) => {
-//   if (getComputedStyle(div).height === "44px") {
-//     div.style.display = "none"; /* yoki inline, flex */
-//   }
-// });
+document.querySelectorAll("div").forEach((div) => {
+  if (getComputedStyle(div).height === "44px") {
+    div.style.display = "none"; /* yoki inline, flex */
+  }
+});
