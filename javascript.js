@@ -227,6 +227,6 @@ viewer.add(
 
 document.querySelectorAll("div").forEach((div) => {
   if (getComputedStyle(div).height === "44px") {
-    div.style.display = "none"; /* yoki inline, flex */
+    div.style.display = "none"; 
   }
 });

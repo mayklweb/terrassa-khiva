@@ -1,17 +1,17 @@
 let data = [
-  { id: 1, image: "./foods/61.webp" },
-  { id: 1, image: "./foods/62.webp" },
-  { id: 1, image: "./foods/63.webp" },
-  { id: 1, image: "./foods/64.webp" },
-  { id: 1, image: "./foods/65.webp" },
-  { id: 1, image: "./foods/66.webp" },
-  { id: 1, image: "./foods/67.webp" },
-  { id: 1, image: "./foods/68.webp" },
-  { id: 1, image: "./foods/70.webp" },
-  { id: 1, image: "./foods/71.webp" },
-  { id: 1, image: "./foods/72.webp" },
-  { id: 1, image: "./foods/73.webp" },
-  { id: 1, image: "./foods/74.webp" },
+  { id: 1, image: "./foods/61.webp", name: "" },
+  { id: 1, image: "./foods/62.webp", name: "Chechivichniy sup" },
+  { id: 1, image: "./foods/63.webp", name: "" },
+  { id: 1, image: "./foods/64.webp", name: "" },
+  { id: 1, image: "./foods/65.webp", name: "" },
+  { id: 1, image: "./foods/66.webp", name: "" },
+  { id: 1, image: "./foods/67.webp", name: "" },
+  { id: 1, image: "./foods/68.webp", name: "" },
+  { id: 1, image: "./foods/70.webp", name: "" },
+  { id: 1, image: "./foods/71.webp", name: "" },
+  { id: 1, image: "./foods/72.webp", name: "" },
+  { id: 1, image: "./foods/73.webp", name: "" },
+  { id: 1, image: "./foods/74.webp", name: "" },
 ];
 
 const menuBtn = document.querySelector(".menu-btn");
@@ -26,11 +26,13 @@ menuBtn.addEventListener("click", () => {
 
 // Rasm divlarini yaratish va qo‘shish
 let imgDivs = data
-  .map(({ image }) => {
-    return `<div class='menu-img'>
+  .map(({ image, name }) => {
+    return `<div class="menu-item">
+    <div class='menu-img'>
       <img src="${image}" alt="Food Image" />
+      </div>
+      <p class="menu-name">${name}</p>
     </div>`;
   })
-  .join(""); // String qilib birlashtiramiz
-
+  .join("");
 menuContainer.innerHTML = imgDivs;
